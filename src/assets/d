@@ -1,0 +1,50 @@
+import { useState } from 'react'
+import reactLogo from './assets/react.svg'
+import viteLogo from '/vite.svg'
+import './App.css'
+import axios from 'axios'
+
+function App() {
+  
+  
+  const [image, setImage] = useState(null)
+  
+  const handlefile=(e)=>{
+    setImage(e.target.files[0])
+  }
+
+  const handleupload=async(e)=>{
+    const data=new FormData()
+    data.append('image',image)
+    const url='http://localhost:3000/upload'
+  
+      
+  axios.post(url,data).then(
+        result=>{
+          console.log(result)
+          
+        }
+      ).catch(err=>{
+        console.log(err)
+      })       
+      
+    }
+     
+    
+
+
+  return (
+    <>
+    
+     <form onSubmit={handleupload}>
+
+      <input type="file" onChange={handlefile} name="" id="" />
+      <button type="submit">Upload</button>
+
+
+     </form>
+    </>
+  )
+}
+
+export default App
